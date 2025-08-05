@@ -69,7 +69,8 @@ class ClientPrefs
 			},
 			"indicateNear" => {
 				display: "Indicate Near Notes",
-				desc: "When toggled, notes of supported skins and types will get brighter to indicate if the player is able to hit them.\nMuch like FPS+!",
+				desc: "When toggled, notes of supported skins and types will get brighter to indicate if the player is able to hit them.
+Enabling Quants will change the logic to visualise the colors of the judgement you'd get if you hit the note at that time.",
 				type: Toggle,
 				value: false,
 				data: []

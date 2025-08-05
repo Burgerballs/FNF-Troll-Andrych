@@ -1,5 +1,8 @@
 package funkin.objects;
 
+import funkin.data.JudgmentManager;
+import funkin.objects.hud.BaseHUD;
+import flixel.util.FlxColor;
 import math.Vector3;
 import flixel.math.FlxMath;
 import funkin.scripts.*;
@@ -648,10 +651,21 @@ class Note extends NoteObject
 	{		
 		colorSwap.daAlpha = alphaMod * alphaMod2;
 		if (!inEditor && canIndicateNear && canBeHit && !isSustainNote && !indicated) {
-			canIndicateNear = false;
-			indicated = true;
-			colorSwap.brightness += 2;
-			colorSwap.saturation += 0.2;
+			if (!isQuant) {
+				canIndicateNear = false;
+				indicated = true;
+
+				colorSwap.brightness += 2;
+				colorSwap.saturation += 0.2;
+			} else if (exists) {
+				var j = PlayState.instance.judgeManager.judgmentData.get(PlayState.instance.judgeManager.judgeTimeDiff(Math.abs(this.strumTime - Conductor.songPosition)));
+				var color:FlxColor = 0xFF333333;
+				if (j != null && j.internalName != UNJUDGED) {
+					color = BaseHUD._judgeColours.get(j.internalName);
+				}
+				var colorConvert = CoolUtil.rgbToHsv(color.redFloat, color.greenFloat, color.blueFloat);
+				colorSwap.setHSB(colorConvert[0], colorConvert[1] * 2 - 1, colorConvert[2] * 2 - 1);
+			}
 		}
 
 		if (tooLate && !inEditor && alpha > 0.3)

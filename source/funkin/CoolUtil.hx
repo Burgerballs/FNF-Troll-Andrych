@@ -36,6 +36,7 @@ class CoolUtil {
 		return curDiffIdx < 0 ? 0 : curDiffIdx;
 	}
 
+
 	public static function prettyInteger(num:Int):String {
 		var buf = new StringBuf();
 
@@ -84,6 +85,31 @@ class CoolUtil {
 		return spr;
 	}
 	
+	public static function rgbToHsv(r, g, b) {
+
+
+		var max = Math.max(r, Math.max(g,b));
+		var min = Math.min(r, Math.min(g,b));
+		var h = max; var s = max; var v = max;
+
+		var d = max - min;
+		s = max == 0 ? 0 : d / max;
+
+		if (max == min) {
+			h = 0; // achromatic
+		} else {
+			switch (max) {
+				case r: h = (g - b) / d + (g < b ? 6 : 0);
+				case g: h = (b - r) / d + 2;
+				case b: h = (r - g) / d + 4;
+			}
+
+			h /= 6;
+		}
+
+		return [ h, s, v ];
+	}
+
 	public static function makeOutlinedGraphic(Width:Int, Height:Int, Color:Int, LineThickness:Int, OutlineColor:Int)
 	{
 		var rectangle = flixel.graphics.FlxGraphic.fromRectangle(Width, Height, OutlineColor, true);
