@@ -232,7 +232,7 @@ class MusicBeatState extends FlxUIState
 	public static function switchState(nextState:FlxState)
 	{
 		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
+		
 		Mouse.cursor = MouseCursor.AUTO;
 
 		FlxG.switchState(nextState); // just because im too lazy to goto every instance of switchState and change it to a FlxG call

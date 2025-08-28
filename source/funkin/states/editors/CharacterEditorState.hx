@@ -1108,7 +1108,7 @@ class CharacterEditorState extends MusicBeatState
 			MusicBeatState.switchState(new MasterEditorMenu());
 			MusicBeatState.playMenuMusic(true);
 		}
-		FlxG.mouse.visible = false;
+		
 	}
 
 	override function update(elapsed:Float)

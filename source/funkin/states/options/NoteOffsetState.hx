@@ -252,7 +252,7 @@ class NoteOffsetState extends MusicBeatState
 			persistentUpdate = false;
 			MusicBeatState.switchState(new funkin.states.options.OptionsState());
 			MusicBeatState.playMenuMusic(true);
-			FlxG.mouse.visible = false;
+			
 		}
 
 		Conductor.songPosition = FlxG.sound.music.time;

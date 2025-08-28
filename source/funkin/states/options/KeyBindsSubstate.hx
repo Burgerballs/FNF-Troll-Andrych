@@ -346,7 +346,7 @@ class KeyBindsSubstate extends MusicBeatSubstate  {
 		if (updateKeyboard)
 		{
 			FlxG.sound.play(Paths.sound("scrollMenu"));
-			FlxG.mouse.visible = false;
+			
 
 			var prevSel = keyboardNavigation[prevY];
 			if (prevSel != null && prevSel.text != null){

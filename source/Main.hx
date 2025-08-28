@@ -142,6 +142,9 @@ class Main extends Sprite
 		game = new FNFGame(gameWidth, gameHeight, initialState, framerate, framerate, skipSplash, startFullscreen);
 		addChild(game);
 
+		// addChild(new TitleBar());
+		// Application.current.window.borderless = true;
+
 		#if linux
 		FlxG.stage.window.setIcon(Image.fromFile("icon.png"));
 		#end

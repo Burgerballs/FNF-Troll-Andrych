@@ -2451,7 +2451,7 @@ class ChartingState extends MusicBeatState
 			MusicBeatState.switchState(new funkin.states.editors.MasterEditorMenu());
 			MusicBeatState.playMenuMusic(true);
 
-			FlxG.mouse.visible = false;
+			
 		}
 	}
 

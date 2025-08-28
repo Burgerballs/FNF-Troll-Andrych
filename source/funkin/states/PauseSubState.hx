@@ -121,7 +121,7 @@ class PauseSubState extends MusicBeatSubstate
 				}
 
 				PlayState.instance.optionsChanged(changedOptions);
-				FlxG.mouse.visible = false;
+				
 
 				closeSubState();
 				if (!canResume && changedOptions.length > 0){
@@ -216,7 +216,7 @@ class PauseSubState extends MusicBeatSubstate
 		prevTimeScale = FlxG.timeScale;
 		FlxG.timeScale = 1;
 
-		FlxG.mouse.visible = false;
+		
 		persistentUpdate = false;
 
 		var cam:FlxCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];

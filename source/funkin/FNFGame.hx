@@ -40,7 +40,7 @@ class FNFGame extends FlxGame
 
 		FlxG.sound.volume = FlxG.save.data.volume;
 		FlxG.mouse.useSystemCursor = true;
-		FlxG.mouse.visible = false;
+		
 
 		// shader coords fix
 		function resetSpriteCaches() {

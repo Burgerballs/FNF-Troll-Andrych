@@ -37,7 +37,8 @@ class MainMenuState extends MusicBeatState
 		//#if MODS_ALLOWED 'mods', #end
 		// 'credits',
 		//#if !switch 'donate', #end
-		'options'
+		'options',
+		'options-beta'
 	];
 
 	var bg:FlxSprite;
@@ -97,9 +98,9 @@ class MainMenuState extends MusicBeatState
 		{
 			var menuItem:FlxSprite = new FlxSprite(0, (i * 140) + offset);
 			
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_$optionName');
-			menuItem.animation.addByPrefix('idle', '$optionName basic', 24);
-			menuItem.animation.addByPrefix('selected', '$optionName white', 24);
+			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_${optionName.replace('-beta', '')}');
+			menuItem.animation.addByPrefix('idle', '${optionName.replace('-beta', '')} basic', 24);
+			menuItem.animation.addByPrefix('selected', '${optionName.replace('-beta', '')} white', 24);
 			menuItem.animation.play('idle');
 
 			menuItem.scrollFactor.set(0, scr);
@@ -214,6 +215,8 @@ class MainMenuState extends MusicBeatState
 							MusicBeatState.switchState(new CreditsState());
 						case 'options':
 							LoadingState.loadAndSwitchState(new funkin.states.options.OptionsState());
+						case "options-beta":
+							LoadingState.loadAndSwitchState(new funkin.states.options.CoolOptionsState());
 					}
 				});
 			}
