@@ -191,7 +191,7 @@ Enabling Quants will change the logic to visualise the colors of the judgement y
 			},
 			"svDetail" => {
 				display: "Scroll Velocity Smoothness",
-				desc: "The amount of SV objects spawned every step in an interpolated SV event. Higher values may consume more RAM. Lower values may make changes appear more abrupt.",
+				desc: "The amount of SV objects spawned every step in an interpolated SV event.\nHigher values may consume more RAM. Lower values may make changes appear more abrupt.",
 				type: Number,
 				value: 16,
 				data: [
