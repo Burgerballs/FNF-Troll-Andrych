@@ -65,7 +65,21 @@ class ClientPrefs
 				desc: "When toggled, a giant fucking fish appears that covers the game if you get 100% accuracy",
 				type: Toggle,
 				value: false,
-				data: []
+				data: [],
+			},
+			"detail" => {
+				display: "Graphics",
+				desc: "This will determine both the detail and usage of VFX everywhere.\nWill counteract the shader options if set low enough.",
+				type: Dropdown,
+				value: "Super",
+				data: [
+					"requiresRestart" => true,
+					"options" => [
+						"Low",
+						"Medium",
+						"Super"
+					]
+				]
 			},
 			"indicateNear" => {
 				display: "Indicate Near Notes",
@@ -447,7 +461,7 @@ Enabling Quants will change the logic to visualise the colors of the judgement y
 				data: []
 			},
 			"midScroll" => {
-				display: "Middlescroll",
+				display: "Centered Notefields",
 				desc: "When toggled, notes will be centered. Don't expect this option to be reflected in modcharts.",
 				type: Toggle,
 				value: false,
