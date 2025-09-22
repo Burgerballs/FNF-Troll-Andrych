@@ -1,6 +1,7 @@
 package funkin.modchart;
 // @author Nebula_Zorua
 
+import flixel.math.FlxMath;
 import funkin.objects.playfields.NoteField;
 import funkin.modchart.Modifier;
 import funkin.modchart.modifiers.*;
@@ -120,6 +121,8 @@ class ModManager {
 		registerAux("cmod");
 		registerAux("movePastReceptors");
 		registerAux("nmvSimulator");
+		registerAux("movePathType"); 
+		registerAlias("centeredPathType", "movePathType");
 		for (i in 0...PlayState.keyCount){
 			registerAux("xmod" + i);
 			registerAux("cmod" + i);
@@ -590,7 +593,7 @@ class ModManager {
 			pos = new Vector3();
 
 		diff += (
-			getValue("movePath", player) * 112) + 
+			(FlxMath.lerp(Note.swagWidth, Conductor.crotchet * 0.45 * (obj.objType == NOTE ? getNoteSpeed(cast obj, player, field.songSpeed) : getCMod(data, player, field.songSpeed) * getXMod(data, player)), getValue("movePathType", player))) * getValue("movePath", player)) + 
 			getValue("transformPath", player
 		); 
 		

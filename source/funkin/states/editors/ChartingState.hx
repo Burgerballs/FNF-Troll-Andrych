@@ -246,6 +246,7 @@ class ChartingState extends MusicBeatState
 	var balanceIndicatorR:FlxBar;
 	var balanceIndicatorLLabel:FlxText;
 	var balanceIndicatorRLabel:FlxText;
+	var npsText:FlxText;
 	var balanceIndicatorValue:FlxText;
 
 	var value1InputText:FlxUIInputText;
@@ -568,6 +569,12 @@ class ChartingState extends MusicBeatState
 		balanceIndicatorValue.borderSize = 2;
 		balanceIndicatorValue.scrollFactor.set();
 		add(balanceIndicatorValue);
+
+		npsText = new FlxText(balanceIndicatorValue.x, balanceIndicatorValue.y - 24, balanceIndicatorLBG.width, "NPS: 9" , 16);
+		npsText.setFormat(null, 18, 0xFFFFFFFF, LEFT, FlxTextBorderStyle.OUTLINE, 0xFF000000);
+		npsText.borderSize = 2;
+		npsText.scrollFactor.set();
+		add(npsText);
 
 
 		/*
@@ -2248,7 +2255,20 @@ class ChartingState extends MusicBeatState
 				lastConductorPos = Conductor.songPosition;
 			}
 		}
-
+		var it = 0;
+		for (i in _song.notes) {
+			for (s in i.sectionNotes) {
+				if (
+					// in range
+					s[0] >= Conductor.songPosition - 2000 && s[0] <= Conductor.songPosition && 
+					// is player
+					((i.mustHitSection == true && s[1] <= 3) || (i.mustHitSection == false && s[1] > 3))
+				) {
+					it+=1;
+				}
+			}
+		}
+		npsText.text = 'NPS: ${it / 2.0}';
 		balanceIndicatorL.value = (1.0 * noteLCount) / (1.0 * noteCount);
 		balanceIndicatorR.value = (1.0 * noteRCount) / (1.0 * noteCount);
 		balanceIndicatorValue.text = 'Balance: $balancePercentage%';
@@ -2411,6 +2431,7 @@ class ChartingState extends MusicBeatState
 
 			FlxTween.tween(Conductor, {songPosition: feces}, 0.1, {ease: FlxEase.circOut});
 		}
+
 		
 		var shiftThing:Int = 1;
 		if (FlxG.keys.pressed.SHIFT)
