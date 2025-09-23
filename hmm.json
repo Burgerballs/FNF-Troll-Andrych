@@ -9,10 +9,10 @@
 		},
 		{
 			"name": "lime",
-			"type": "git",
+			"type": "garfie-baby/main",
 			"dir": null,
 			"ref": "develop",
-			"url": "https://github.com/swordcubes-grave-of-shite/lime"
+			"url": "https://github.com/swordcubes-grave-of-shite/lime-fc"
 		},
 		{
 			"name": "flixel",
