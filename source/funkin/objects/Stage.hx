@@ -13,6 +13,25 @@ import animateatlas.AtlasFrameMaker;
 
 using StringTools;
 
+//todo: devise a plan that doesn't make me want to blow up when programming this.
+typedef PsychEngineStagePropGeneric = {
+	type:String,
+	scale:Array<Float>,
+	scroll:Array<Float>,
+	x:Float,
+	y:Float,
+	?flipX:Bool,
+	?flipY:Bool,
+	antialiasing:Bool,
+	color:String,
+	alpha:Float,
+	angle:Float
+
+}
+typedef PsychEngineStagePropSquare = {
+	color:String
+}
+
 typedef VSliceStageProp = {
 	?name:String,
 	assetPath:String,
