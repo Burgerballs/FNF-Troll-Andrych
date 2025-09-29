@@ -26,6 +26,8 @@ typedef Node = {
 }
 
 class ModManager {
+	public var CENTER:Int = 0;
+	public var BEAT:Int = 1;
 	public var isAvailable:Bool = false; // Set to true after default modifiers are set
 	public var queuedEvents:Array<BaseEvent> = [];
 
