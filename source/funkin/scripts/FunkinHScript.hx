@@ -1,5 +1,6 @@
 package funkin.scripts;
 
+import flixel.addons.effects.FlxTrail;
 import haxe.CallStack;
 import funkin.scripts.Util.ModchartSprite;
 #if USING_FLXANIMATE
@@ -144,7 +145,7 @@ class FunkinHScript extends FunkinScript
 
 		set("Date", Date);
 		set("DateTools", DateTools);
-		
+		set("FlxTrail", FlxTrail);
 		set("getClass", Type.resolveClass);
 		set("getEnum", Type.resolveEnum);
 		
