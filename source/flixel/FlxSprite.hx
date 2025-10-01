@@ -888,6 +888,9 @@ class FlxSprite extends FlxObject
 	function drawComplex(camera:FlxCamera):Void
 	{
 		prepareMatrix(camera);
+
+		doAdditionalMatrixStuff(_matrix, camera);
+
 		camera.drawPixels(_frame, framePixels, _matrix, colorTransform, blend, antialiasing, shader);
 	}
 
@@ -975,6 +978,18 @@ class FlxSprite extends FlxObject
 		{
 			x += offset.x;
 			y += offset.y;
+		}
+	}
+
+	public function doAdditionalMatrixStuff(matrix:FlxMatrix, camera:FlxCamera)
+	{
+		if(__shouldDoZoomFactor()) {
+			matrix.translate(-camera.width / 2, -camera.height / 2);
+
+			var requestedZoom = (camera.zoom >= 0 ? Math.max : Math.min)(FlxMath.lerp(1, camera.zoom, zoomFactor), 0);
+			var diff = requestedZoom / camera.zoom;
+			matrix.scale(diff, diff);
+			matrix.translate(camera.width / 2, camera.height / 2);
 		}
 	}
 
