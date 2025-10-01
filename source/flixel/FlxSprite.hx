@@ -145,6 +145,10 @@ class FlxSprite extends FlxObject
 	 */
 	public var animation:FlxAnimationController;
 
+	public var zoomFactor:Float = 1;
+	private inline function __shouldDoZoomFactor()
+		return zoomFactor != 1;
+
 	// TODO: maybe convert this var to property...
 
 	/**
@@ -1368,7 +1372,23 @@ class FlxSprite extends FlxObject
 		if (isPixelPerfectRender(camera))
 			newRect.floor();
 		newRect.setSize(frameWidth * Math.abs(scale.x), frameHeight * Math.abs(scale.y));
-		return newRect.getRotatedBounds(angle, _scaledOrigin, newRect);
+
+		var r = newRect.getRotatedBounds(angle, _scaledOrigin, newRect);
+
+		if(__shouldDoZoomFactor()) {
+			r.x -= camera.width / 2;
+			r.y -= camera.height / 2;
+
+			var ratio = (camera.zoom > 0 ? Math.max : Math.min)(0, FlxMath.lerp(1 / camera.zoom, 1, zoomFactor));
+			r.x *= ratio;
+			r.y *= ratio;
+			r.width *= ratio;
+			r.height *= ratio;
+
+			r.x += camera.width / 2;
+			r.y += camera.height / 2;
+		}
+		return r;
 	}
 	
 	/**

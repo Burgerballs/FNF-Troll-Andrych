@@ -49,6 +49,7 @@ This fork has some features that are different to the original or are completely
 - [Riconuts](https://github.com/riconuts) - Owner of original engine
 - [Nebula the Zorua](https://x.com/Nebula_Zorua) - Co-Owner of original engine
 - EliteMasterEric - Code i stole from him and ninjamuffin99 for v-slice bullshit lole!
+- Codename Engine Developers - Zoom Factor shit i stole lole!
 
 
 The following remains unchanged for the purpose of accurate crediting upon the existence of later changes from later versions of Troll Engine.
