@@ -958,7 +958,7 @@ class PlayState extends MusicBeatState
 		}
 		hud.cameras = [camHUD];
 		hud.alpha = ClientPrefs.hudOpacity;
-		add(hud);
+		
 
 		#if PE_MOD_COMPATIBILITY
 		healthBar = hud.getHealthbar();
@@ -1146,6 +1146,7 @@ class PlayState extends MusicBeatState
 		add(playfields);
 		add(notefields);
 		add(grpNoteSplashes);
+		add(hud);
 
 		luaDebugGroup.cameras = [camOther];
 		add(luaDebugGroup);

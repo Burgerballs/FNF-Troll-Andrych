@@ -333,9 +333,7 @@ class NoteField extends FieldBase
 	}
 
 
-	// Caching variables we might want.
-	var prevSubDivs:Int = 1;
-	var progs:Array<Float> = [0, 1];
+	public static var progs:Array<Float> = [0, 1];
 
 
 	var crotchet:Float = Conductor.getCrotchetAtTime(0.0) / 4.0;
@@ -356,6 +354,8 @@ class NoteField extends FieldBase
 
 		var simpleDraw = !hold.copyX && !hold.copyY;
 		var subDivs:Int = simpleDraw ? 1 : holdSubdivisions;
+
+
 
 		var vertices = new Vector<Float>(8 * subDivs, true);
 		var uvData = new Vector<Float>(8 * subDivs, true);
@@ -381,8 +381,8 @@ class NoteField extends FieldBase
 		var lookAheadTime = modManager.getValue("lookAheadTime", modNumber);
 		var useSpiralHolds = modManager.getValue("spiralHolds", modNumber) != 0;
 
-		if (subDivs != prevSubDivs) {
-			progs = CoolMath.interpolateMass(0, 1, subDivs);
+		if (subDivs != NoteField.progs.length - 2) {
+			NoteField.progs = CoolMath.interpolateMass(0, 1, subDivs);
 		}
 
 		var strumSub = (crotchet / subDivs) * sv;
@@ -394,8 +394,6 @@ class NoteField extends FieldBase
 				strumSub *= scale;
 			}
 		}
-		
-		prevSubDivs = subDivs;
 
 		var alphaMult = hold.baseAlpha;
 
@@ -406,8 +404,8 @@ class NoteField extends FieldBase
 
 		for (sub in 0...subDivs)
 		{
-			var prog = progs[sub];
-			var nextProg = progs[sub+1];
+			var prog = NoteField.progs[sub];
+			var nextProg = NoteField.progs[sub+1];
 			var strumOff = (strumSub * sub);
 
 			scalePoint.set(1, 1);
@@ -441,7 +439,6 @@ class NoteField extends FieldBase
 				bot[1].y -= offset;
 			}
 			lastMe = bot;
-
 			for (_ in 0...2) { // why was this keyCount lol??  
 				alphas.push(info.alpha);
 				glows.push(info.glow);
@@ -456,6 +453,13 @@ class NoteField extends FieldBase
 			top[1].y += holdOffset.y;
 			bot[0].y += holdOffset.y;
 			bot[1].y += holdOffset.y;
+
+			if ((bot[0].y >= 720 || bot[0].y <= 0) &&
+				(bot[1].y >= 720 || bot[1].y <= 0) &&
+				(top[0].y >= 720 || top[0].y <= 0) &&
+				(top[1].y >= 720 || top[1].y <= 0)) {
+					continue;
+				}
 
 
 			var subIndex = sub * 8;

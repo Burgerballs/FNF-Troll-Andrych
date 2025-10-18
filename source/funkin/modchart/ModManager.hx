@@ -118,6 +118,7 @@ class ModManager {
 
 		registerAux("noteSpawnTime");
 		registerAux("drawDistance");
+		registerAux("pathLines");
 		registerAux("disableDrawDistMult");
 		registerAux("flashR");
 		registerAux("flashG");
@@ -171,6 +172,8 @@ class ModManager {
 		setValue("scaleX", 1, mN);
 		setValue("scaleY", 1, mN);
 		setValue("darkSplashes", 1);
+
+		setValue("pathLines", 1, mN);
 
 		setValue("lookAheadTime", 2, mN);
 

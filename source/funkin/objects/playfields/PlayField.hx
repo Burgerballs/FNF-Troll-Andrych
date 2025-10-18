@@ -645,7 +645,7 @@ class PlayField extends FlxTypedGroup<FlxBasic>
 		}
 		return collected;
 	}
- 
+
 	// get all living TAP notes
 	public function getTapNotes(dir:Int, ?filter:Note->Bool):Array<Note> {
 		if (tapsByData[dir] == null)
