@@ -65,12 +65,16 @@ class NotefieldRenderer extends FlxBasic {
 	
 	var point:FlxPoint = FlxPoint.get(0, 0);
 	
+	inline function getFlashComponent(field:NoteField, component:String, column:Int)
+		return field.modManager.getValue('flash$component', field.modNumber) * field.modManager.getValue('flash$column$component', field.modNumber);
+	
+
 	override function draw(){
 		var finalDrawQueue:Array<FinalRenderObject> = [];
 
 		// Get all the drawing stuff from the fields
 		for(field in members){
-			if (!field.active || !field.exists || !field.visible)
+			if ((!field.exists || !field.visible) && !field.forcePreDraw) // maybe rename forcePreDraw to something that makes more sense (i.e forceDrawQueuing or some shit)
 				continue; // Ignore it
 
 			field.preDraw(); // Collects all the drawing information
@@ -82,21 +86,20 @@ class NotefieldRenderer extends FlxBasic {
 		for (field in members){
 			field.draw(); // Just incase they want to do something before gathering happens (i.e ProxyFields grabbing their host's draw queue) 
 
-			if(!field.visible || !field.active || !field.exists)
+			if (!field.exists || !field.visible)
 				continue;
 			
 			var realField:NoteField = field.getNotefield();
 
-			var glowColour = realField.modManager == null ? FlxColor.WHITE : FlxColor.fromRGBFloat(realField.modManager.getValue("flashR",
-				realField.modNumber), realField.modManager.getValue("flashG", realField.modNumber),
-				realField.modManager.getValue("flashB", realField.modNumber));
-
 			var queue:Array<RenderObject> = field.drawQueue;
 			for (object in queue){
-				object.shader.precisionHint = FAST;
+				var glowColour = realField.modManager == null ? FlxColor.WHITE : FlxColor.fromRGBFloat(getFlashComponent(realField, 'R', object.column),
+					getFlashComponent(realField, 'G', object.column), getFlashComponent(realField, 'B', object.column));
+					
 				finalDrawQueue.push({
 					graphic: object.graphic,
 					shader: object.shader,
+					column: object.column,
 					alphas: object.alphas,
 					glows: object.glows,
 					uvData: object.uvData,
@@ -134,8 +137,15 @@ class NotefieldRenderer extends FlxBasic {
 			var multAlpha = object.sourceField.alpha * ClientPrefs.noteOpacity;
 			for (n in 0...Std.int(vertices.length / 2)) {
 				var glow = glows[n];
-				transforms.push(new ColorTransform(1-glow, 1-glow, 1-glow, alphas[n] * multAlpha, 
-					object.glowColour.red * glow, object.glowColour.green * glow, object.glowColour.blue * glow));
+				var transfarm:ColorTransform = new ColorTransform();
+				transfarm.redMultiplier = (1 - glow) * object.sourceField.color.redFloat;
+				transfarm.greenMultiplier = (1 - glow) * object.sourceField.color.greenFloat;
+				transfarm.blueMultiplier = (1 - glow) * object.sourceField.color.blueFloat;
+				transfarm.redOffset = (object.glowColour.red * glow) * object.sourceField.glowColor.redFloat;
+				transfarm.greenOffset = (object.glowColour.green * glow) * object.sourceField.glowColor.greenFloat;
+				transfarm.blueOffset = (object.glowColour.blue * glow) * object.sourceField.glowColor.blueFloat;
+				transfarm.alphaMultiplier = alphas[n] * multAlpha;
+				transforms.push(transfarm);
 			}
 			for (camera in object.cameras) {
 				if (camera != null && camera.canvas != null && camera.canvas.graphics != null) {
@@ -144,6 +154,7 @@ class NotefieldRenderer extends FlxBasic {
 					for (shit in transforms)
 						shit.alphaMultiplier *= camera.alpha;
 					
+					object.sourceField.getScreenPosition(point, camera);
 					var drawItem = camera.startTrianglesBatch(graphic, object.antialiasing, true, null, true, shader);
 					@:privateAccess
 					{
