@@ -26,6 +26,7 @@ A: I don't want to.
 
 This fork has some features that are different to the original or are completely new.
 
+* Backported features from current Troll Engine
 * V-Slice Character Support
 * Reskinned Options Menu
 * Interpolated SV Events
