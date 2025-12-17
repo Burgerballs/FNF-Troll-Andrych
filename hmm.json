@@ -9,9 +9,9 @@
 		},
 		{
 			"name": "lime",
-			"type": "garfie-baby/main",
+			"type": "git",
 			"dir": null,
-			"ref": "develop",
+			"ref": "garfie-baby/main",
 			"url": "https://github.com/swordcubes-grave-of-shite/lime-fc"
 		},
 		{

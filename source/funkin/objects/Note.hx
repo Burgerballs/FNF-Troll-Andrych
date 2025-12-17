@@ -213,7 +213,9 @@ class Note extends NoteObject
 	 */
 	public var fieldIndex:Int = -1;
 	public var field:PlayField; // same as fieldIndex but lets you set the field directly incase you wanna do that i  guess
-
+	
+	
+	
 
 	public var noteSplashBehaviour:SplashBehaviour = DEFAULT;
 	public var noteSplashDisabled(get, set):Bool; // shortcut, disables the notesplash when you hit this note

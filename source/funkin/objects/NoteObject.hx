@@ -15,6 +15,7 @@ enum abstract ObjectType(#if cpp cpp.UInt8 #else Int #end)
 }
 
 class NoteObject extends FlxSprite {
+	public var suddenAffected:Bool = true; // wether or not certain alpha modifiers in modcharts affect the notes
 	public var zIndex:Float = 0;
 	public var objType:ObjectType = UNKNOWN;
 

@@ -67,6 +67,11 @@ class CoolUtil {
 		];
 	}
 
+	// Really fucking stupid but calling inline functions is really twitchy in hscript so this is the best way i can do it
+	public static function outLineContains(a,b):Bool {
+		return a.contains(b);
+	}
+
 	public static function alphabeticalSort(a:String, b:String):Int {
 		// https://haxe.motion-twin.narkive.com/BxeZgKeh/sort-an-array-string-alphabetically
 		a = a.toLowerCase();

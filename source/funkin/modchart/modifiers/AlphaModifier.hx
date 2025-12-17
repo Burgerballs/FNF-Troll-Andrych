@@ -82,6 +82,7 @@ class AlphaModifier extends NoteModifier
 
 	override function getExtraInfo(diff:Float, tDiff:Float, beat:Float, info:RenderInfo, obj:NoteObject, player:Int, data:Int):RenderInfo
 	{
+		if (!obj.suddenAffected) return info;
 		var alpha:Float = info.alpha;
 		if (obj.objType == NOTE){
 			var yPos:Float = 50 + diff;
