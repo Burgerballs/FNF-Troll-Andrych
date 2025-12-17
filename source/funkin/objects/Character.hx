@@ -23,7 +23,8 @@ class Character extends FlxSprite
 	/**Character to use if the requested one fails to load**/
 	public static final DEFAULT_CHARACTER:String = 'bf';
 
-	////
+	/**Makes character mimic V-Slice hold behaviour**/
+	public var VSliceBehaviour = false;
 
 	/**Id of the character**/
 	public var characterId:String = DEFAULT_CHARACTER;
@@ -521,7 +522,7 @@ class Character extends FlxSprite
 		if (callOnScripts("playNote", [note, field]) == Globals.Function_Stop)
 			return;
 
-		if (note.noAnimation || animTimer > 0.0 || voicelining)
+		if (note.noAnimation || animTimer > 0.0 || voicelining || (VSliceBehaviour && note.isSustainNote))
 			return;
 
 		if (note.noteType == 'Hey!' && animOffsets.exists('hey')) {
