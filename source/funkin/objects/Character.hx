@@ -533,8 +533,12 @@ class Character extends FlxSprite
 		}
 
 		var animToPlay:String = Character.getNoteAnimation(note, field) + animSuffix;
-
-		playAnim(animToPlay, true);
+		if (animOffsets.exists(animToPlay + '-hold') && note.isSustainNote) {
+			playAnim(animToPlay + '-hold', true);
+			animToPlay += '-hold';
+		}
+		else
+			playAnim(animToPlay, true);
 		holdTimer = 0.0;
 		callOnScripts("playNoteAnim", [animToPlay, note]);
 	}
