@@ -237,18 +237,11 @@ class Note extends NoteObject
 	// mod manager
 	public var garbage:Bool = false; // if this is true, the note will be removed in the next update cycle
 	public var alphaMod:Float = 1;
-	public var alphaMod2:Float = 1; // TODO: unhardcode this shit lmao
-	// What is this even used for anymore??
 
 	public var typeOffsetX:Float = 0; // used to offset notes, mainly for note types. use in place of offset.x and offset.y when offsetting notetypes
 	public var typeOffsetY:Float = 0;
 	public var typeOffsetAngle:Float = 0;
 	public var multSpeed:Float = 1.0;
-
-	// do not tuch
-	public var baseScaleX:Float = 1;
-	public var baseScaleY:Float = 1;
-	public var z:Float = 0;
 
 	// Determines how the note can be modified by the modchart system
 	// Could be moved into NoteObject? idk lol
@@ -651,7 +644,7 @@ class Note extends NoteObject
 
 	override function draw()
 	{		
-		colorSwap.daAlpha = alphaMod * alphaMod2;
+		colorSwap.daAlpha = alphaMod;
 		if (!inEditor && canIndicateNear && canBeHit && !isSustainNote && !indicated) {
 			if (!isQuant) {
 				canIndicateNear = false;
