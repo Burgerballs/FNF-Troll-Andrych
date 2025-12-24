@@ -192,7 +192,7 @@ class Main extends Sprite
 		final screenHeight = Capabilities.screenResolutionY;
 		if (adjustGameSize) {
 			//// Readjust the game size for smaller screens
-			if (!(screenWidth > gameWidth || screenHeight > gameWidth)){
+			if (!(screenWidth < gameWidth || screenHeight < gameWidth)){
 				var ratioX:Float = screenWidth / gameWidth;
 				var ratioY:Float = screenHeight / gameHeight;
 				
