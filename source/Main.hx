@@ -188,23 +188,7 @@ class Main extends Sprite
 	}
 
 	public static function resizeGame() {
-		final screenWidth = Capabilities.screenResolutionX;
-		final screenHeight = Capabilities.screenResolutionY;
-		if (adjustGameSize) {
-			//// Readjust the game size for smaller screens
-			if (!(screenWidth < gameWidth || screenHeight < gameWidth)){
-				var ratioX:Float = screenWidth / gameWidth;
-				var ratioY:Float = screenHeight / gameHeight;
-				
-				var zoom = Math.min(ratioX, ratioY);
-				gameWidth = Math.ceil(screenWidth / zoom);
-				gameHeight = Math.ceil(screenHeight / zoom);
-			}
-		}
-
-		//// Readjust the window size for larger screens 
-		var scaleFactor:Int = Math.floor((screenWidth > screenHeight) ? (screenHeight / gameHeight) : (screenWidth / gameWidth));
-		if (scaleFactor < 1) scaleFactor = 1;
+		var scaleFactor = 1;
 
 		resizeWindow(gameWidth * scaleFactor, gameHeight * scaleFactor);
 		centerWindow();
