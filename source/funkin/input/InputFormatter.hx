@@ -44,11 +44,6 @@ class InputFormatter
 			case PERIOD: ".";
 			case SLASH: "/";
 			case GRAVEACCENT: "`";
-			#if !mac
-			case WINDOWS: "Windows";
-			#else
-			case WINDOWS: "Command";
-			#end
 			case LBRACKET: "[";
 			case BACKSLASH: "\\";
 			case RBRACKET: "]";

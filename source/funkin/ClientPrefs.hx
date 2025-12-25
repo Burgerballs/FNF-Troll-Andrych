@@ -3,7 +3,7 @@ package funkin;
 #if !macro
 import Main.Version;
 
-import funkin.input.Controls.KeyboardScheme;
+import funkin.input.Controls;
 import flixel.util.FlxSave;
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepadInputID;
@@ -1005,7 +1005,7 @@ Enabling Quants will change the logic to visualise the colors of the judgement y
 		{
 			var loadedControls:Map<String, Array<FlxKey>> = save.data.customControls;
 			for (control => keys in loadedControls)
-				keyBinds.set(control, keys);
+				keyBinds.set(control, keys.filter((key) -> key != NONE));
 
 			reloadControls();
 		}
@@ -1073,7 +1073,11 @@ Enabling Quants will change the logic to visualise the colors of the judgement y
 
 	public static function reloadControls()
 	{
-		funkin.input.PlayerSettings.player1.controls.setKeyboardScheme(KeyboardScheme.Solo);
+		
+		Controls.firstActive.keyBinds = keyBinds;
+
+
+		Controls.firstActive.buttonBinds = buttonBinds;
 
 		StartupState.muteKeys = copyKey(keyBinds.get('volume_mute'));
 		StartupState.volumeDownKeys = copyKey(keyBinds.get('volume_down'));

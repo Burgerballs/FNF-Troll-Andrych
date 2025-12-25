@@ -11,13 +11,13 @@ import funkin.states.MusicBeatState;
 import funkin.states.FadeTransitionSubstate;
 
 import funkin.data.Highscore;
-import funkin.input.PlayerSettings;
 
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tweens.*;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.input.keyboard.FlxKey;
+import funkin.input.Controls;
 
 #if sys
 import Sys.time as getTime;
@@ -94,7 +94,7 @@ class StartupState extends FlxTransitionableState
 			function():Void {
 				Paths.init();
 				Paths.getAllStrings();
-				PlayerSettings.init();
+				Controls.init();
 				ClientPrefs.initialize();
 				ClientPrefs.load();
 				Highscore.load();

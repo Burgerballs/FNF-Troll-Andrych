@@ -13,7 +13,7 @@ import haxe.io.Path;
 import funkin.scripts.FunkinHScript;
 import funkin.states.scripting.*;
 #end
-
+import funkin.input.Controls;
 #if SCRIPTABLE_STATES
 import funkin.states.scripting.HScriptOverridenState;
 #end
@@ -107,7 +107,7 @@ class MusicBeatState extends FlxUIState
 	}
 
 	inline function get_controls():Controls
-		return funkin.input.PlayerSettings.player1.controls;
+		return funkin.input.Controls.firstActive;
 
 	override function create() 
 	{

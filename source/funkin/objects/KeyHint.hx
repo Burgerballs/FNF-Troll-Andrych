@@ -30,9 +30,7 @@ class KeyHint extends FlxTypedSpriteGroup<FlxSprite> {
         super(x, y);
 
         if (Std.isOfType(keys, String)) {
-            this.keys = [];
-            for (i in controls.getActionFromControl(Control.createByName(keys)).inputs)
-                this.keys.push(i.inputID);
+            this.keys = ['Hi'];
         } else {
             this.keys = keys;
         }
