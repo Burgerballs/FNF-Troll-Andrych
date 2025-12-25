@@ -112,7 +112,7 @@ class MusicBeatState extends FlxUIState
 	override function create() 
 	{
 		FlxG.autoPause = ClientPrefs.autoPause;
-		
+		FlxG.camera.bgColor.alpha = 0;
 		super.create();
 	}
 
